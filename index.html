@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Participar do Sorteio</title>
+</head>
+<body>
+<h1>Participar do Sorteio</h1>
+<input type="text" id="participantName" placeholder="Seu Nome">
+<button onclick="addParticipant()">Participar do Sorteio</button>
+<ul id="participantsList"></ul>
+<button onclick="redirectToSorteio()">Ir para Sorteio</button>
+
+<script>
+function addParticipant() {
+    const participantName = document.getElementById('participantName').value;
+    if(participantName.trim() !== '') {
+        const participantList = document.getElementById('participantsList');
+        const li = document.createElement('li');
+        li.textContent = participantName;
+        participantList.appendChild(li);
+        document.getElementById('participantName').value = '';
+    }
+}
+
+function redirectToSorteio() {
+    const participants = Array.from(document.getElementsByTagName('li')).map(li => li.textContent);
+    sessionStorage.setItem('participants', JSON.stringify(participants));
+    window.location.href = 'sorteio.html';
+}
+</script>
+</body>
+</html>
